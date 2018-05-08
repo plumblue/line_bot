@@ -66,10 +66,11 @@ function doPost(e) {
     reply_messages = ["L,\nLA,\nW\\n買いたいもの,\nB\\n買ったものの番号\nのどれかで入力して"];
   //W（小文字可）から始まるコマンドの場合、W以外の文字列をリストとして追記
   }else if(user_message.match(/^W/i)){
-  　 　var add_list_from_user = user_message.split(","); //全角スペースを半角スペースに変換して半角スペースで区切る
+  　 　var add_list_from_user = user_message.split(",");
     add_list_from_user.shift();
     addToList(add_list_from_user);
-    reply_messages = ["買いたいものね、追加するよ"];
+    var result = getList();
+    reply_messages = ["買いたいものね、追加するよ\n" + result.join("\n") + "\n⇧追加したよ"];
   //B（小文字可）から始まるコマンドの場合、B以外の文字列を購買リストとして追記
   }else if(user_message.match(/^B/i)){
   　 　var bought_list_from_user = user_message.split(",");
